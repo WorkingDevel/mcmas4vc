@@ -1,0 +1,283 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "ISPL",
+	"uuid": "",
+	"variables": {
+		"startOfIdentifier": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))",
+		"endOfIdentifier": "(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+	},
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#statements"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#keywords"
+		}
+	],
+	"repository": {
+		"statements": {
+			"patterns": [
+				{
+					"include": "#agent-definition"
+				},
+				{
+					"include": "#evaluation-definition"
+				}
+			]
+		},
+		"agent-definition": {
+			"patterns": [
+				{
+					"begin": "^\\s*(Agent)\\s+([a-zA-z0-9_]+)\\s*$",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.definition.agent.ispl"
+						},
+						"2": {
+							"name": "entity.name.section.agent.ispl"
+						}
+					},
+					"end": "(end)\\s+(Agent)",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.control.terminator.statement.ispl"
+						},
+						"2": {
+							"name": "keyword.control.definition.agent.end.ispl"
+						}
+					},
+					"contentName": "meta.entity.section.agent.ispl",
+					"patterns": [
+						{
+							"include": "#evolution-definition"
+						},
+						{
+							"include": "#protocol-definition"
+						},
+						{
+							"include": "#keywords"
+						}
+					]
+				}
+			]
+		},
+		"evolution-definition": {
+			"patterns": [
+				{
+					"begin": "^\\s*(Evolution)\\s*:",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.definition.evolution.begin.ispl"
+						},
+						"2": {
+							"name": "punctuation.definition.keyword.ispl"
+						}
+					},
+					"end": "(end)\\s+(Evolution)\\s*$",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.control.terminator.statement.ispl"
+						},
+						"2": {
+							"name": "keyword.control.definition.evolution.end.ispl"
+						}
+					},
+					"contentName": "meta.entity.section.agent.evolution.ispl",
+					"patterns": [
+						{
+							"include": "#control-statement"
+						},
+						{
+							"include": "#keywords"
+						}
+					]
+				}
+			]
+		},
+		"evaluation-definition": {
+			"patterns": [
+				{
+					"begin": "^\\s*(Evaluation)\\s*$",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.definition.evaluation.begin.ispl"
+						},
+						"2": {
+							"name": "punctuation.definition.keyword.ispl"
+						}
+					},
+					"end": "(end)\\s+(Evaluation)\\s*$",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.control.terminator.statement.ispl"
+						},
+						"2": {
+							"name": "keyword.control.definition.evaluation.end.ispl"
+						}
+					},
+					"contentName": "meta.entity.section.agent.evaluation.ispl",
+					"patterns": [
+						{
+							"include": "#control-statement"
+						},
+						{
+							"include": "#keywords"
+						}
+					]
+				}
+			]
+		},
+		"protocol-definition": {
+			"patterns": [
+				{
+					"begin": "^\\s*(Protocol)\\s*:",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.definition.evolution.begin.ispl"
+						},
+						"2": {
+							"name": "punctuation.definition.keyword.ispl"
+						}
+					},
+					"end": "(end)\\s+(Protocol)\\s*$",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.control.terminator.statement.ispl"
+						},
+						"2": {
+							"name": "keyword.control.definition.protocol.end.ispl"
+						}
+					},
+					"contentName": "meta.entity.section.agent.protocol.ispl",
+					"patterns": [
+						{
+							"include": "#other-definition"
+						}
+					]
+				}
+			]
+		},
+		"other-definition": {
+			"patterns": [
+				{
+					"begin": "^\\s*(Other)\\s*:\\s*({)",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.definition.evolution.begin.ispl"
+						},
+						"2": {
+							"name": "keyword.operator.curly-brace.open.ispl"
+						}
+					},
+					"end": "(})(;)",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.operator.curly-brace.close.ispl"
+						},
+						"2": {
+							"name": "punctuation.terminator.statement.ispl"
+						}
+					}
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.reserved.ispl",
+					"match": "\\b(MA|SA|MultiAssignment|SingleAssignment|Semantics|Agent|Lobsvars|Obsvars|Vars|RedStates|Actions|Protocol|Evaluation|InitStates|Groups|Fairness|Formulae|Other|Evolution|Environment|boolean|true|false)\\b"
+				},
+				{
+					"name": "keyword.function.formula.ispl",
+					"match": "\\b(AG|EG|AX|EX|AF|EF|A|E|K|GK|GCK|DK|O|X|F|G)\\b"
+				}
+			]
+		},
+		"control-statement": {
+			"patterns": [
+				{
+					"begin": "\\b(if)\\b",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.conditional.ispl"
+						},
+						"2": {
+							"name": "keyword.operator.brace.open.ispl"
+						}
+					},
+					"end": "(\\))\\s*(;)",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.operator.brace.close.ispl"
+						},
+						"2": {
+							"name": "punctuation.terminator.statement.ispl"
+						}
+					},
+					"patterns": [
+						{
+							"match": "\\b(and|or)\\b",
+							"name": "keyword.other.ispl"
+						},
+						{
+							"match": "(=)",
+							"name": "keyword.operator.equal.ispl"
+						}
+					]
+				}
+			]
+		},
+		"punctuation-semicolon": {
+			"name": "punctuation.terminator.statement.ispl",
+			"patterns": [
+				{
+					"match": ";"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"begin": "(^[ \\t]+)?((--)(?:\\s*((@)internal)(?=\\s|$))?)",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.whitespace.comment.leading.ispl"
+						},
+						"2": {
+							"name": "comment.line.double-slash.ispl"
+						},
+						"3": {
+							"name": "punctuation.definition.comment.ispl"
+						},
+						"4": {
+							"name": "storage.type.internaldeclaration.ispl"
+						},
+						"5": {
+							"name": "punctuation.decorator.internaldeclaration.ispl"
+						}
+					},
+					"end": "(^)",
+					"contentName": "comment.line.double-slash.ispl"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.ispl",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.ispl",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.mcmas.ispl"
+}

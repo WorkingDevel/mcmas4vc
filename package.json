@@ -1,0 +1,26 @@
+{
+    "name": "mcmas4vc",
+    "displayName": "MCMAS4vc",
+    "description": "MCMAS tooling for VSCode",
+    "version": "0.0.1",
+    "publisher": "WorkingDeveloper",
+    "engines": {
+        "vscode": "^1.19.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "ispl",
+            "aliases": ["ISPL", "ispl"],
+            "extensions": ["ispl"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "ispl",
+            "scopeName": "source.mcmas.ispl",
+            "path": "./syntaxes/ispl.tmLanguage.json"
+        }]
+    }
+}
