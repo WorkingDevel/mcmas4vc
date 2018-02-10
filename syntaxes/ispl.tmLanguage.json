@@ -79,7 +79,7 @@
 							"name": "punctuation.definition.keyword.ispl"
 						}
 					},
-					"end": "(end)\\s+(Evolution)\\s*$",
+					"end": "(end)\\s+(Evolution)\\s*",
 					"endCaptures": {
 						"1": {
 							"name": "keyword.control.terminator.statement.ispl"
@@ -139,7 +139,7 @@
 					"begin": "^\\s*(Protocol)\\s*:",
 					"beginCaptures": {
 						"1": {
-							"name": "keyword.control.definition.evolution.begin.ispl"
+							"name": "keyword.control.definition.protocol.begin.ispl"
 						},
 						"2": {
 							"name": "punctuation.definition.keyword.ispl"
@@ -169,7 +169,7 @@
 					"begin": "^\\s*(Other)\\s*:\\s*({)",
 					"beginCaptures": {
 						"1": {
-							"name": "keyword.control.definition.evolution.begin.ispl"
+							"name": "keyword.control.definition.other.ispl"
 						},
 						"2": {
 							"name": "keyword.operator.curly-brace.open.ispl"
@@ -183,7 +183,8 @@
 						"2": {
 							"name": "punctuation.terminator.statement.ispl"
 						}
-					}
+					},
+					"contentName": "meta.entity.section.agent.protocol.other.ispl"
 				}
 			]
 		},
@@ -196,6 +197,14 @@
 				{
 					"name": "keyword.function.formula.ispl",
 					"match": "\\b(AG|EG|AX|EX|AF|EF|A|E|K|GK|GCK|DK|O|X|F|G)\\b"
+				},
+				{
+					"match": "\\b(and|or)\\b",
+					"name": "keyword.other.ispl"
+				},
+				{
+					"name": "keyword.function.formula.extension.ctlc.ispl",
+					"match": "\\b(SC|Fu)\\b"
 				}
 			]
 		},
@@ -211,12 +220,9 @@
 							"name": "keyword.operator.brace.open.ispl"
 						}
 					},
-					"end": "(\\))\\s*(;)",
+					"end": "\\s*(;)",
 					"endCaptures": {
 						"1": {
-							"name": "keyword.operator.brace.close.ispl"
-						},
-						"2": {
 							"name": "punctuation.terminator.statement.ispl"
 						}
 					},
@@ -226,7 +232,7 @@
 							"name": "keyword.other.ispl"
 						},
 						{
-							"match": "(=)",
+							"match": "=",
 							"name": "keyword.operator.equal.ispl"
 						}
 					]
